@@ -1,0 +1,16 @@
+#map {
+    height: 80vh;
+    width: 100vw;
+}
+
+#script-div {
+   display : inline-flex
+}
+
+#coords-list{
+    white-space: pre-line;
+}
+
+#gen-script {
+    white-space: pre-line;
+}
