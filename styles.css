@@ -1,10 +1,12 @@
 #map {
-    height: 80vh;
+    height: 70vh;
     width: 100vw;
 }
 
 #script-div {
-   display : inline-flex
+   display : inline-flex;
+   width: 100vw;
+   justify-content: center;
 }
 
 #coords-list{

@@ -6,11 +6,11 @@
        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
    }).addTo(map);
 
-
-   let flightPath = []
-
     // Create a layer group
     var layerGroup1 = L.layerGroup()
+
+
+   let flightPath = []
 
    map.on('click', (e) => {
 
@@ -66,12 +66,8 @@
 
    function calcRandomLatLong(from, to, fixed) {
     // clients@ocus.com
-
     return [Math.random() * (to - from) + from.toFixed(fixed) * 1, Math.random() * (to - from) + from.toFixed(fixed) * 1]
-
    }
-
-
 
   function genScript() {
 
@@ -111,12 +107,15 @@ let head;
 
     document.getElementById('bash-script').value = 
     `curl -v -X POST -H "Content-Type:application/json"
-    $LOC_URL --data '{"geo": {"${JSON.stringify(geo)}"}}`
+    $LOC_URL --data ${JSON.stringify(geo)}`
   }
 
   function clearPath() {
     layerGroup1.clearLayers()
-    map.removeLayer(layerGroup1)
+    //map.removeLayer(layerGroup1)
+
+   flightPath = []
+
     document.getElementById('coords-list').value = ''
     document.getElementById('bash-script').value = ''
   }
