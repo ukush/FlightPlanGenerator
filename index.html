@@ -1,35 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Simple Leaflet Map</title>
+    <title>Flight Plan Scrip Generator</title>
 
     <!-- Include Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-    crossorigin=""/>
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
 
     <!-- Include Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-    crossorigin=""></script>
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
     <link rel="stylesheet" href="styles.css">
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
 </head>
+
 <body>
 
     <!-- Define container for map -->
     <div id="map"></div>
-    <div id="script-div">
-        <textarea name="coords-list" id="coords-list" cols="30" rows="10" type="text"></textarea>
-        <button id="generate-script-text" type="button" onclick=genScript() >Generate Script <Script></Script></button>
-        <button id="clearPath" type="button" onclick=clearPath() >Start New Flight Path <Script></Script></button>
-        <textarea name="bash-script" id="bash-script" cols="30" rows="10" type="text"></textarea>    
-    </div>    
+
+    <div class="script-gen-container">
+
+        <div class="coordinate-text-container">
+            <textarea name="coords-list" id="coords-list" cols="30" rows="10" type="text"></textarea>
+        </div>
+
+        <div class="controls-container">
+            <button class="btn btn-primary" id="generate-script-text" type="button" onclick=genScript()>
+                Generate Script</button>
+            <button class="btn btn-secondary" id="clearPath" type="button" onclick=clearPath()>
+                Start New Flight Path</button>
+            <button class="btn btn-success" id="export-script" type="button" onclick=exportScript()>
+                Export Script</button>
+        </div>
+
+        <div class="script-area-container">
+            <textarea name="bash-script" id="bash-script" cols="30" rows="10" type="text"></textarea>
+            <button id="copy-clip" type="button" class="btn btn-info" onclick=copyClip()>
+                Copy
+            </button>
+        </div>
+
+    </div>
 
 
     <script src="script.js"></script>
 </body>
+
 </html>
