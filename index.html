@@ -29,10 +29,10 @@
 
 <body>
 
-    <!-- Define container for map -->
-    <div id="map"></div>
+   <div class="main-content">
+    <div class="leaflet-map" id="map"></div>
 
-    <div class="script-gen-container">
+    <div class="side-pannel">
 
         <div class="coordinate-text-container">
             <textarea name="coords-list" id="coords-list" cols="30" rows="10" type="text"></textarea>
@@ -41,10 +41,8 @@
         <div class="controls-container">
             <button class="btn btn-primary" id="generate-script-text" type="button" onclick=genScript()>
                 Generate Script</button>
-            <button class="btn btn-secondary" id="clearPath" type="button" onclick=clearPath()>
-                Start New Flight Path</button>
-            <button class="btn btn-success" id="export-script" type="button" onclick=exportScript()>
-                Export Script</button>
+            <button class="btn btn-danger" id="clearPath" type="button" onclick=clearPath()>
+               Clear Flight Path</button>
         </div>
 
         <div class="script-area-container">
@@ -53,8 +51,12 @@
                 Copy
             </button>
         </div>
-
+        <duv class="export">
+            <button class="btn btn-success" id="export-script" type="button" onclick=exportScript()>
+                Export Script</button>
+        </duv>
     </div>
+</div>  
 
 
     <script src="script.js"></script>

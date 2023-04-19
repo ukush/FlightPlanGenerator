@@ -1,31 +1,54 @@
-#map {
-    height: 70vh;
-    width: 100vw;
-}
-/* Main Script Generator Container */
-.script-gen-container {
-    background-color: #00364d;
+
+  body {
+    min-height: 100%;
+    height: 100%;
+  }
+
+
+.main-content {
     display: grid;
-    grid-template-columns: 0.75fr repeat(2, 1fr);
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1.5fr 0.5fr;
     grid-template-rows: 1fr;
-    gap: 0px 5px;
-    grid-auto-flow: row;
+    gap: 0px 0px;
     grid-template-areas:
-        "coordinate-text-container controls-container script-area-container";
+        "leaflet-map -side-pannel";
 }
 
-/* Style all divs inside main container*/
-.script-gen-container div {
-    min-height: 30vh;
-    max-height: 30vh;
-    padding :10px;
+
+#map {
+    height: 100vh;
+}
+
+/* Main Script Generator Container */
+.side-pannel {
+    height: 100vh;
+    background-color:  #00364d;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.25fr 0.25fr 1fr 0.25fr; 
+    gap: 0px 5px;
+    grid-template-areas:
+        "coordinate-text-container"
+        "controls-container"
+        "script-area-container"
+        "export";
+    
+        overflow :scroll;
 }
 
 /* Lat Long text area */
 
+.coordinate-text-container {
+    /* border: 2px solid greenyellow; */
+    padding: 10px;
+}
+
 #coords-list {
-    width: 100%;
     height: 100%;
+    width: 100%;
     white-space: pre-line;
     border-radius: 10px;
     padding: 5px;
@@ -34,20 +57,20 @@
 }
 
 /* Control container styles */
-.controls-container {
-    grid-area: controls-container;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-}
 
 /* Control Button Styles*/
 
+.controls-container {
+    /* border: 2px solid greenyellow; */
+    margin: 0px;
+
+}
+
 .controls-container button {
+    width: 75%;
     border-radius: 10px;
+    margin:0 auto;
+    display:block;
 }
 
 .controls-container button:focus {
@@ -56,8 +79,11 @@
 
 /* Script area container styles*/
 .script-area-container {
+    /* border: 2px solid greenyellow; */
     grid-area: script-area-container;
+    margin-top: 0;
     position: relative;
+    padding: 10px;
 }
 
 .script-area-container button {
@@ -68,17 +94,29 @@
 }
 
 .script-area-container button:focus {
-   background-color: #28a745;
-   outline : none;
-   
+    background-color: #28a745;
+    outline: none;
+
 }
 
 .script-area-container textarea {
-        white-space: pre-line;
-        border-radius: 10px;
-        padding: 5px;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;   
-        text-align: start; 
+    white-space: pre-line;
+    border-radius: 10px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: start;
+}
+
+.export {
+    grid-area: export;
+    /* border: 2px solid greenyellow; */
+}
+
+#export-script {
+    border-radius: 10px;
+    width: 75%;
+    margin:0 auto;
+    display:block;
 }
