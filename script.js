@@ -44,13 +44,9 @@
     // draw a line between each marker when added
     L.polyline(flightPath, {color : 'red'}).addTo(layerGroup1)
 
-
-    flightPath.forEach((element) => {
-        // put the lat long into the text area
-    document.getElementById('coords-list').value += `${element}` + "\n"
-    })
-
-
+    // put the lat long into the text area
+    document.getElementById('coords-list').value += currentPosition + "\n"
+   
    })
 
 
