@@ -42,7 +42,7 @@
 /* Lat Long text area */
 
 .coordinate-text-container {
-    /* border: 2px solid greenyellow; */
+    border: 2px solid greenyellow;
     padding: 10px;
 }
 
@@ -61,7 +61,7 @@
 /* Control Button Styles*/
 
 .controls-container {
-    /* border: 2px solid greenyellow; */
+    border: 2px solid greenyellow;
     margin: 0px;
 
 }
@@ -79,7 +79,7 @@
 
 /* Script area container styles*/
 .script-area-container {
-    /* border: 2px solid greenyellow; */
+    border: 2px solid greenyellow;
     grid-area: script-area-container;
     margin-top: 0;
     position: relative;
@@ -111,7 +111,7 @@
 
 .export {
     grid-area: export;
-    /* border: 2px solid greenyellow; */
+    border: 2px solid greenyellow;
 }
 
 #export-script {
