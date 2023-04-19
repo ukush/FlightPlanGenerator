@@ -136,8 +136,7 @@
     flightPoints.forEach((element) => {
          // Put this JSON into the text area in the format of the script
         document.getElementById('bash-script').value +=  
-        `curl -v -X POST -H "Content-Type:application/json"
-        $LOC_URL --data ${JSON.stringify(element)}` + "\n\n"
+        `curl -v -X POST -H "Content-Type:application/json" $LOC_URL --data ${JSON.stringify(element)}` + "\n\n"
     })
 
   }
@@ -174,5 +173,3 @@ function exportScript() {
   
       URL.revokeObjectURL(a.href);
 }
-
-
