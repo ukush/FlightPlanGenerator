@@ -1,6 +1,6 @@
 // --------- Init Map Settings -----------------------------//
 
-   var map = L.map('map').setView([51.505, -0.09], 2);
+   var map = L.map('map').setView([51.505, -0.09], 3);
 
    // Add tile layer to map object
    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
