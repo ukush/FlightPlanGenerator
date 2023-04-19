@@ -4,8 +4,9 @@
 }
 /* Main Script Generator Container */
 .script-gen-container {
+    background-color: #00364d;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 0.75fr repeat(2, 1fr);
     grid-template-rows: 1fr;
     gap: 0px 5px;
     grid-auto-flow: row;
@@ -29,6 +30,7 @@
     border-radius: 10px;
     padding: 5px;
     box-sizing: border-box;
+    text-align: start;
 }
 
 /* Control container styles */
@@ -77,5 +79,6 @@
         padding: 5px;
         width: 100%;
         height: 100%;
-        box-sizing: border-box;    
+        box-sizing: border-box;   
+        text-align: start; 
 }

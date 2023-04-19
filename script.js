@@ -1,11 +1,15 @@
 // --------- Init Map Settings -----------------------------//
 
-   var map = L.map('map').setView([51.505, -0.09], 4);
+   var map = L.map('map').setView([51.505, -0.09], 2);
 
    // Add tile layer to map object
-   L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+       minZoom : 2
    }).addTo(map);
+
+   map.setMaxBounds(  [[-90,-180],   [90,180]]  )
+
 
     // Create a layer group
     var layerGroup1 = L.layerGroup()
@@ -41,8 +45,11 @@
     L.polyline(flightPath, {color : 'red'}).addTo(layerGroup1)
 
 
-    // put the lat long into the text area
-    document.getElementById('coords-list').value = flightPath
+    flightPath.forEach((element) => {
+        // put the lat long into the text area
+    document.getElementById('coords-list').value += `${element}` + "\n"
+    })
+
 
    })
 
