@@ -127,7 +127,7 @@ function genScript() {
             altitude: altitude,
             heading: head,
             groundTrack : head,
-            groundSpeed : -300
+            groundSpeed : 300
         }
         flightPoints.push(flightPoint)
 
