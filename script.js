@@ -137,9 +137,11 @@ function genScript() {
 
         // Create a flight point JSON
         flightPoint = {
-            latitude: flightPath[i][0],
-            longitude: flightPath[i][1],
-            altitude: altitude,
+            geo : {
+                latitude: flightPath[i][0],
+                longitude: flightPath[i][1],
+                altitude: altitude,
+            },
             heading: head,
             groundTrack : head,
             groundSpeed : 300
@@ -148,16 +150,10 @@ function genScript() {
 
     }
 
-    // Create the JSON that holds the flight points data
-    let geo = {
-        geo: flightPoints
-    }
-
-
     flightPoints.forEach((element) => {
         // Put this JSON into the text area in the format of the script
         document.getElementById('bash-script').value +=
-            `curl -v -X POST -H "Content-Type:application/json" $LOC_URL --data ${JSON.stringify(element)}` + "\n\n"
+            `curl -v -X POST -H "Content-Type:application/json" $LOC_URL --data '${JSON.stringify(element)}'` + "\n\n"
     })
 } else {
     alert('Cannot generate curl script for empty flight path')
