@@ -58,24 +58,39 @@ map.on('click', (e) => {
  */
 function calcHeading(latlngStart, latlngEnd) {
 
+
     // Convert to Radians
-    let startLat = latlngStart[0] * Math.PI / 180
-    let startLng = latlngStart[1] * Math.PI / 180
-    let destLat = latlngEnd[1] * Math.PI / 180
-    let destLng = latlngEnd[1] * Math.PI / 180
+    const startLat = toRadians(latlngStart[0])
+    const startLng = toRadians(latlngStart[1])
+    const endLat = toRadians(latlngEnd[0])
+    const endLng = toRadians(latlngEnd[1])
 
-    // Calculate bearing
-    let y = Math.sin(destLng - startLng) * Math.cos(destLat)
-    let x = Math.cos(startLat)
-        * Math.sin(destLat)
-        - Math.sin(startLat)
-        * Math.cos(destLat)
-        * Math.cos(destLng - startLng)
+    const y = Math.sin(endLng - startLng) * Math.cos(endLat);
+    const x = Math.cos(startLat) * Math.sin(endLat) -
+            Math.sin(startLat) * Math.cos(endLat) * Math.cos(endLng - startLng);
 
-    let bearing = Math.atan2(y, x)
-    bearing = (bearing * 180) / Math.PI
-    return (bearing + 360) % 360
+    let bearing = Math.atan2(y, x);
+    bearing = toDegrees(bearing);
+    return (bearing + 360) % 360;
 
+}
+
+/**
+ * Funtion to convert degrees to radians
+ * @param degrees the lat or long in degrees
+ * @returns the radians for the lat or long point
+ */
+function toRadians(degrees) {
+  return degrees * Math.PI / 180;
+}
+
+/**
+ * Funtion to convert degrees to radians
+ * @param radians the lat or long in radians
+ * @returns the degrees for the lat or long point
+ */
+function toDegrees(radians) {
+  return radians * 180 / Math.PI;
 }
 
 /**
