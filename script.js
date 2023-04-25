@@ -1,5 +1,4 @@
 // -------- Global variables -------- //
-
 // Create a layer group
 var layerGroup1 = L.layerGroup()
 
