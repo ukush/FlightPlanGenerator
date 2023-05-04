@@ -1,53 +1,3 @@
-// -------- Global variables -------- //
-// Create a layer group
-var layerGroup1 = L.layerGroup()
-
-// Array containing all points in the selected flight path (array of arrays)
-let flightPath = []
-
-
-// --------- Init Map Settings -----------------------------//
-
-var map = L.map('map').setView([0,0], 2);
-
-// Add tile layer to map object
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    minZoom: 2
-}).addTo(map);
-
-map.setMaxBounds([[-90, -180], [90, 180]])
-
-
-map.on('click', (e) => {
-
-    // Get the lat longs
-    let lat = e.latlng.lat
-    let lng = e.latlng.lng
-
-    let currentPosition = [lat, lng]
-
-    // Set the array of lat longs
-    flightPath.push(currentPosition)
-
-
-    // Create a marker for each point where the user clicked on and add these markers
-    // to a layerGroup
-    flightPath.forEach(element => {
-        L.marker(element).addTo(layerGroup1)
-    });
-
-    // Add the layergroup to the map
-    layerGroup1.addTo(map)
-
-    // draw a line between each marker when added
-    L.polyline(flightPath, { color: 'red' }).addTo(layerGroup1)
-
-    // put the lat long into the text area
-    document.getElementById('coords-list').value += currentPosition + "\n"
-
-})
-
 
 /**
  * 
@@ -116,11 +66,12 @@ function genScript() {
     // List of JSON storing all flight point data
     let flightPoints = []
 
+
     // Loop though each latlng in the flightpath
     for (let i = 0; i < flightPath.length; i++) {
 
         // Randomly calculate a altitute
-        let altitude = Math.floor((Math.random() * (10010 - 9990 + 1) + 9990));
+        altitude = Math.floor((Math.random() * (10010 - 9990 + 1) + 9990));
 
         let head;
 
@@ -134,11 +85,14 @@ function genScript() {
             head = calcHeading(flightPath[i], calcRandomLatLong(-180, 180, 3))
         }
 
+        latitude = flightPath[i][0]
+        longitude = flightPath[i][1]
+
         // Create a flight point JSON
         flightPoint = {
             geo : {
-                latitude: flightPath[i][0],
-                longitude: flightPath[i][1],
+                latitude: latitude,
+                longitude: longitude,
                 altitude: altitude,
             },
             heading: head,
@@ -147,7 +101,19 @@ function genScript() {
         }
         flightPoints.push(flightPoint)
 
+        let latInMilli = degreesToMilli(parseInt(latitude))
+        let longInMilli = degreesToMilli(parseInt(longitude))
+        let altInMilli = degreesToMilli(parseInt(altitude))
+
+        snmpsetScript(latInMilli, longInMilli, altInMilli)
+
     }
+
+        // let latInMilli = degreesToMilli(parseInt(latitude))
+        // let longInMilli = degreesToMilli(parseInt(longitude))
+        // let altInMilli = degreesToMilli(parseInt(altitude))
+        //
+        // snmpsetScript(latInMilli, longInMilli, altInMilli)
 
     flightPoints.forEach((element) => {
         // Put this JSON into the text area in the format of the script
@@ -170,20 +136,22 @@ function clearPath() {
 
     document.getElementById('coords-list').value = ''
     document.getElementById('bash-script').value = ''
+    document.getElementById('snmpset-format').value = ''
 }
 
-function copyClip() {
-    let text = document.getElementById('bash-script').value
+function copyClip(script) {
+    let text = document.getElementById(script).value
 
     // Copy the text inside the text field
     navigator.clipboard.writeText(text);
 }
 
 function exportScript() {
-    let text = document.getElementById('bash-script').value
+    let curl = document.getElementById('bash-script').value
+    let snmpset = document.getElementById('snmpset-format').value
 
-    if (text != "") {
-        let blob = new Blob([text], { type: 'text/plain' })
+    if (curl && snmpset != "") {
+        let blob = new Blob([curl, snmpset], { type: 'text/plain' })
 
         const a = document.createElement('a');
     
@@ -195,4 +163,16 @@ function exportScript() {
     } else {
         alert("Cannot export empty flight path")
     }
+}
+
+function degreesToMilli(degrees) {
+    return parseInt(degrees * 60 * 60 * 1000)
+}
+
+function snmpsetScript(lat, long, alt) {
+    let text = document.getElementById('snmpset-format').value +=
+    `snmpset -v 2c -c public $HOST_IP:10161 1.3.6.1.4.1.3231.1.5.57.1.1.1.14.$TERM_ID i ${lat}` + '\n' +
+    `snmpset -v 2c -c public $HOST_IP:10161 1.3.6.1.4.1.3231.1.5.57.1.1.1.14.$TERM_ID i ${long}` + '\n' +
+    `snmpset -v 2c -c public $HOST_IP:10161 1.3.6.1.4.1.3231.1.5.57.1.1.1.14.$TERM_ID i ${alt}` + '\n' +
+    `snmpset -v 2c -c public $HOST_IP:10161 1.3.6.1.4.1.3231.1.5.57.1.1.1.14.$TERM_ID i 0` + '\n\n'
 }

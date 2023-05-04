@@ -13,7 +13,7 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="resources/css/styles.css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -41,7 +41,7 @@
         <div class="controls-container">
             <div class="control-buttons">
                 <button class="btn btn-primary" id="generate-script-text" type="button" onclick=genScript()>
-                    Generate Script</button>
+                    Generate Scripts</button>
                 <button class="btn btn-danger" id="clearPath" type="button" onclick=clearPath()>
                     Clear Flight Path</button>
             </div>
@@ -49,19 +49,25 @@
 
         <div class="script-area-container">
             <textarea name="bash-script" id="bash-script" cols="30" rows="10" type="text"></textarea>
-            <button id="copy-clip" type="button" class="btn btn-info" onclick=copyClip()>
+            <textarea name="snmpset" id="snmpset-format" cols="30" rows="10" type="text"></textarea>
+            <button id="copy-clip" type="button" class="btn btn-info" onclick=copyClip('bash-script')>
                 Copy
             </button>
+            <button id="copy" type="button" class="btn btn-info" onclick=copyClip('snmpset-format')>
+                Copy
+            </button>
+
         </div>
         <duv class="export">
             <button class="btn btn-success" id="export-script" type="button" onclick=exportScript()>
-                Export Script</button>
+                Export</button>
         </duv>
     </div>
 </div>  
 
 
-    <script src="script.js"></script>
+    <script src="resources/js/script.js"></script>
+    <script src="resources/js/map.js"></script>
 </body>
 
 </html>
